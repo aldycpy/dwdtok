@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050b1c">
+<title>TikTokdwd by AldZDEV — TikTok Downloader</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="bg" aria-hidden="true"><i></i><i></i><i></i></div>
+<button type="button" class="lite-toggle" id="liteToggle" aria-pressed="false">Mode Ringan</button>
+<div class="wrap">
+  <div id="viewHome" class="view active">
+  <header>
+    <img class="brand-logo" src="logo.png" alt="TikTokdwd logo">
+    <h1>TikTokdwd</h1>
+    <p>Paste a TikTok link to download the full video without a watermark.</p>
+  </header>
+
+  <div class="card">
+    <div class="input-row">
+      <input type="text" id="urlInput" placeholder="https://www.tiktok.com...">
+      <button class="btn-primary" id="submitBtn">֍ Download</button>
+    </div>
+    <div class="hint">Supports tiktok.com, vt.tiktok.com, and vm.tiktok.com links.</div>
+
+    <div class="status" id="status">
+      <div class="spinner"></div>
+      <span id="statusText">Processing...</span>
+    </div>
+
+    <div class="notice" id="notice">
+      <div class="notice-head">
+        <div class="notice-dot"></div>
+        <div class="notice-title">Warning</div>
+      </div>
+      <div class="notice-body" id="noticeBody">You have exceeded the request limit. Downloads remaining: 0 of 10.</div>
+      <div class="notice-nav">
+        <button class="primary" id="noticeGuide">View Guide</button>
+        <button id="noticeClose">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <div class="acc-title">Panduan &amp; Batasan ⌔</div>
+  <div class="accordion" id="accordion">
+    <div class="acc-item">
+      <div class="acc-head">
+        <span>Cara Penggunaan</span><span class="chev"></span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Salin tautan video TikTok melalui tombol Bagikan (Share), tempelkan pada kolom di atas, kemudian klik tombol Download. Hasil unduhan mencakup video tanpa watermark, keterangan (caption), data akun, serta statistik lengkap (suka, komentar, bagikan, dan tayangan).
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head">
+        <span>Batas Penggunaan</span><span class="chev"></span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Maksimal 10 kali unduhan per alamat IP dalam kurun waktu 3 jam. Sistem juga membedakan pola penggunaan: permintaan yang dikirim secara beruntun dalam waktu yang sangat singkat akan terdeteksi sebagai spam dan langsung dibatasi, terlepas dari total pemakaian. Penggunaan normal dengan jeda yang wajar tidak akan terkena deteksi ini, meskipun mencapai batas maksimal.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head">
+        <span>Video Tidak Dapat Diproses?</span><span class="chev"></span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Pastikan video bersifat publik (bukan privat atau khusus teman) dan tautan masih aktif. Video yang baru saja diunggah terkadang memerlukan beberapa menit sebelum dapat diakses.
+      </div></div>
+    </div>
+    <div class="acc-item">
+      <div class="acc-head">
+        <span>Kebijakan Privasi</span><span class="chev"></span>
+      </div>
+      <div class="acc-body"><div class="acc-body-inner">
+        Tautan yang Anda masukkan hanya diproses untuk mengambil data video dan tidak disimpan secara permanen di server.
+      </div></div>
+    </div>
+  </div>
+
+  <footer>TikTokdwd by AldZDEV</footer>
+  </div>
+
+  <div id="viewNotif" class="view">
+    <div class="acc-title">Notifikasi</div>
+    <div id="notifList"></div>
+  </div>
+
+  <div id="viewDownload" class="view">
+    <div class="acc-title">Riwayat Download</div>
+    <div id="downloadList"></div>
+  </div>
+
+  <div id="viewMenu" class="view">
+    <div class="acc-title">Menu</div>
+    <div class="menu-list">
+      <a href="spotify.html" class="menu-list-item" id="menuSpotify">
+        <span class="menu-list-icon"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+        <span class="menu-list-text">Spotify Download</span>
+        <span class="menu-status-dot" id="statusDotSpotify" title="Mengecek status..."></span>
+        <svg class="menu-list-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <a href="play-spotify.html" class="menu-list-item" id="menuPlaySpotify">
+        <span class="menu-list-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4Z"/></svg></span>
+        <span class="menu-list-text">Play Spotify</span>
+        <span class="menu-status-dot" id="statusDotPlaySpotify" title="Mengecek status..."></span>
+        <svg class="menu-list-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+      </a>
+      <button type="button" class="menu-list-item" id="menuContact">
+        <span class="menu-list-icon"><svg viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+        <span class="menu-list-text">Contact Owner</span>
+        <svg class="menu-list-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contactModalOverlay">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="modal-title">Contact Owner</div>
+      <button type="button" class="modal-close" id="contactModalClose" aria-label="Tutup">
+        <svg viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+      </button>
+    </div>
+    <div class="contact-buttons">
+      <a class="contact-btn" id="contactWhatsapp" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+        <span class="contact-btn-text">WhatsApp<small>Chat langsung</small></span>
+      </a>
+      <a class="contact-btn" id="contactTelegram" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+        <span class="contact-btn-text">Telegram<small>Kirim pesan</small></span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<nav class="bottom-nav">
+  <button class="nav-item active" data-view="viewHome">
+    <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10v9a1 1 0 0 0 1 1H10v-6h4v6h3.5a1 1 0 0 0 1-1v-9"/></svg></span>
+    <span>Home</span>
+  </button>
+  <button class="nav-item" data-view="viewNotif">
+    <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 10a6 6 0 0 1 12 0c0 4 1.5 5.5 2 6H4c.5-.5 2-2 2-6Z"/><path d="M10 19a2 2 0 0 0 4 0"/></svg></span>
+    <span>Notifikasi</span>
+    <span class="nav-badge" id="notifBadge"></span>
+  </button>
+  <button class="nav-item" data-view="viewDownload">
+    <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M12 4v11"/><path d="m7 11 5 5 5-5"/><path d="M5 20h14"/></svg></span>
+    <span>Download</span>
+  </button>
+  <button class="nav-item" data-view="viewMenu">
+    <span class="nav-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-layout-grid-icon lucide-layout-grid"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span>
+    <span>Lainnya</span>
+  </button>
+</nav>
+
+<script src="app.js"></script>
+<script>
+(function(){
+  var b=document.body,t=document.getElementById('liteToggle'),K='tiktokdwd_lite';
+  var saved=null;try{saved=localStorage.getItem(K);}catch(e){}
+  var weak=(navigator.hardwareConcurrency&&navigator.hardwareConcurrency<=4)||(navigator.connection&&navigator.connection.saveData);
+  function set(on){b.classList.toggle('lite',on);t.setAttribute('aria-pressed',on);}
+  set(saved===null?!!weak:saved==='1');
+  t.addEventListener('click',function(){var on=!b.classList.contains('lite');set(on);try{localStorage.setItem(K,on?'1':'0');}catch(e){}});
+})();
+</script>
+</body>
+</html>
